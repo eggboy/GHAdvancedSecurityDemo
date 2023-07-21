@@ -30,16 +30,22 @@ jobs:
         server-id: changl0368
         server-username: MAVEN_USERNAME
         server-password: MAVEN_PASSWORD
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-    - name: Upload SBOM(Cyclonedx)
-      uses: actions/upload-artifact@v3
-      with:
-        name: bom.json
-        path: './target/bom.json'
     - name: Publish package
       run: mvn --batch-mode deploy
       env:
         MAVEN_USERNAME: ${{ secrets.CHANGL0368_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.CHANGL0368_TOKEN }}
+    - name: Upload SBOM(Cyclonedx)
+      uses: actions/upload-artifact@v3
+      with:
+        name: bom.json
+        path: './target/bom.json'
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Submit Dependency Snapshot
+        uses: advanced-security/maven-dependency-submission-action@v3
+
     
