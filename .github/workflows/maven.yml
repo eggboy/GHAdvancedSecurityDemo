@@ -62,6 +62,6 @@ jobs:
         run: |
           export CR_PAT=${{ secrets.GHCR_PAT_TOKEN }}
           echo $CR_PAT | docker login ghcr.io -u eggboy --password-stdin
-          pack build ghcr.io/jaydemo:0.0.1 --builder paketobuildpacks/builder:base --buildpack paketo-buildpacks/java-azure --env BP_JVM_VERSION=17 --publish
+          pack build ghcr.io/eggboy/jaydemo:0.0.1 --builder paketobuildpacks/builder:base --buildpack paketo-buildpacks/java-azure --env BP_JVM_VERSION=17 --publish
 
     
