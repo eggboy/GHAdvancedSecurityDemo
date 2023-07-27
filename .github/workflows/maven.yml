@@ -51,6 +51,7 @@ jobs:
           ignore-maven-wrapper: true
   container:
     runs-on: ubuntu-latest
+    needs: build 
     steps:
       - uses: actions/checkout@v3
       - name: Install pack CLIs including pack and yq
