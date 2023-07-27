@@ -49,5 +49,16 @@ jobs:
         uses: advanced-security/maven-dependency-submission-action@v3.0.2
         with:
           ignore-maven-wrapper: true
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install pack CLIs including pack and yq
+        uses: buildpacks/github-actions/setup-pack@v5.0.0
+        with:
+          pack-version: '0.29.0'
+      - name: Pack build
+        run: |
+          pack build ghcr.io/jaydemo:0.0.1 --builder paketobuildpacks/builder:base --buildpack paketo-buildpacks/java-azure --env BP_JVM_VERSION=17 --publish
 
     
